@@ -1,11 +1,9 @@
 require("dotenv").config();
 const express = require("express");
-
-
-
 const cors = require("cors");
 const MongooseConnection = require("./server");
 const app = express();
+const UserRouter = require('./app/user/user.route');
 
 const swaggerUi = require('swagger-ui-express');
 const YAML = require("yamljs");
@@ -20,6 +18,20 @@ app.use(cors())
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+
+
+app.use(UserRouter)
+
+
+app.use((err, _req, res, _next) => {
+  const status = err.status || 500;
+  const message = err.message || "something went occurred";
+  res.status(status).json({
+    status,
+    message,
+  });
+});
+
 
 MongooseConnection().then(() => {
   app.listen(port, () => {
