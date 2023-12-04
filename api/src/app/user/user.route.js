@@ -1,13 +1,9 @@
+const { SignUpController } = require("./user.controller");
+
 const router = require("express").Router();
 
 
 
-router.get("/user", (req, res, next) => {
-    try {
-        res.status(201).json('asfds');
-    } catch (e) {
-        next(e);
-    }
-});
+router.post("/auth/singup", SignUpController);
 
 module.exports = router
