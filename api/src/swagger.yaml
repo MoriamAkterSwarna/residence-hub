@@ -22,7 +22,7 @@ tags:
       
 
 paths:
-  /auth/singup:
+  /auth/signup:
       post:
         tags: [Auth]   
         description: This is a post API for creating Users. 
