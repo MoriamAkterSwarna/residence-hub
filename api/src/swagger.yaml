@@ -437,7 +437,7 @@ paths:
                 photo:
                   type: string
                   example: image1
-                NID:
+                nid:
                   type: string
                   example: 849405983893
                 email:

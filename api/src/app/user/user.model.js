@@ -20,6 +20,10 @@ const userSchema = new Schema({
         type: String,
 
     },
+    permanentAddress: {
+        type: String,
+
+    },
     photo: {
         type: String,
 
@@ -48,7 +52,7 @@ const userSchema = new Schema({
             ref: "House",
         }
     ]
-    
+
 }, { timestamps: true })
 
 const User = model('User', userSchema);

@@ -58,21 +58,21 @@ const houseSchema = new Schema({
         required: true
     },
     userId: {
-       type: Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'User',
         required: true
     },
     status: {
         type: String,
-        enum:['booked', 'available', 'underConstruction'],
+        enum: ['booked', 'available', 'underConstruction'],
         required: true
-    
+
     },
     rentDate: {
         type: Date,
     }
-    }
-    
+}
+
 )
- const House = model('House', houseSchema);
+const House = model('House', houseSchema);
 module.exports = House

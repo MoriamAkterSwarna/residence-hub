@@ -109,7 +109,7 @@ const updatePasswordDB = async (id, data) => {
             throw RH_ERROR
         } else {
             const salt = await bcrypt.genSalt(10)
-            const hashPassword =  await bcrypt.hash(newPassword, salt)
+            const hashPassword = await bcrypt.hash(newPassword, salt)
             existUser.password = hashPassword
             await existUser.save()
             const response = {
@@ -126,7 +126,7 @@ const updatePasswordDB = async (id, data) => {
 const getAllUserDB = async (query) => {
     const { role, status, limit, currentPage, sortType, sortBy } = query;
     let allUserArray = await User.find()
-    
+
     if (role) {
         allUserArray = allUserArray.filter(user => user.role === role)
     }
@@ -154,15 +154,39 @@ const getAllUserDB = async (query) => {
 
     const skip = intPage * intLimit - intLimit;
     allUserArray = allUserArray.slice(skip, skip + intLimit);
-  
+
 
 
     return allUserArray
+}
+
+
+const updateUserInfoDB = async (query, data) => {
+    const { userId: id } = query;
+    const { permanentAddress, photo, nid, email } = data;
+
+    console.log(query, data, ' do')
+    const existUser = await User.findById(id)
+    if (!existUser) {
+        const RH_ERROR = error('Data not fount', 404)
+        throw RH_ERROR
+    } else {
+        existUser.permanentAddress = permanentAddress || existUser.permanentAddress,
+            existUser.photo = photo || existUser.photo,
+            existUser.nid = nid || existUser.nid,
+            existUser.email = email || existUser.email
+
+        const updateUser = await existUser.save()
+
+        return updateUser
+
+    }
 }
 module.exports = {
     singUpDB,
     singInDB,
     getSingleUserDB,
     updatePasswordDB,
-    getAllUserDB
+    getAllUserDB,
+    updateUserInfoDB
 }

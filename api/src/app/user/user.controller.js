@@ -1,4 +1,4 @@
-const { singUpDB, singInDB, getSingleUserDB, updatePasswordDB, getAllUserDB } = require("./user.services");
+const { singUpDB, singInDB, getSingleUserDB, updatePasswordDB, getAllUserDB, updateUserInfoDB } = require("./user.services");
 
 const signUp = async (req, res, next) => {
     try {
@@ -52,10 +52,22 @@ const getAllUser = async (req, res, next) => {
         next(e)
     }
 }
+const updateUserInfo = async (req, res, next) => {
+    try {
+        const query = req.query;
+        const body = req.body;
+        const response = await updateUserInfoDB(query, body)
+        res.status(200).json(response)
+    } catch (e) {
+        next(e)
+    }
+}
+
 module.exports = {
     signUp,
     signIn,
     getSingleUser,
     updatePassword,
-    getAllUser
+    getAllUser,
+    updateUserInfo
 }
