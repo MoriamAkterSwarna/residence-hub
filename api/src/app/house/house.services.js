@@ -1,13 +1,22 @@
- const  House = require('./house.model');
+const User = require('../user/user.model');
+const House = require('./house.model');
 const createHouseDB = async (house) => {
     try {
         
-        const houseData = House.create(house);
+        const houseData = await House.create(house);
+         await User.findOneAndUpdate({
+            _id: house.userId
+        }, {
+            $push: {
+                houseIDForRent: houseData._id
+            }
+        })
         return houseData;
     } catch (error) {
         throw new Error(error);
     }
 }
+
 const getAllHouseFromDB = async (query) => {
     const {availableDate, limit,currentPage,sortType,sortBy} = query
         const date =availableDate
@@ -34,7 +43,7 @@ const getSingleHouseFromDB = async (houseId) => {
 
 const deleteHouseDB = async (userId, houseId) => {
     try {
-        
+
         const houseData = House.findOneAndDelete({ userId, _id: houseId });
         return houseData;
     } catch (error) {

@@ -20,6 +20,10 @@ const userSchema = new Schema({
         type: String,
 
     },
+    permanentAddress: {
+        type: String,
+
+    },
     photo: {
         type: String,
 
@@ -28,6 +32,12 @@ const userSchema = new Schema({
         type: String,
         enum: ["user", "houseOwner", "admin"],
         default: "user",
+        required: true
+    },
+    status: {
+        type: String,
+        enum: ["pending", "approved", "block", "decline"],
+        default: "approved",
         required: true
     },
     houseIDForRent: [
@@ -42,7 +52,8 @@ const userSchema = new Schema({
             ref: "House",
         }
     ]
-})
+
+}, { timestamps: true })
 
 const User = model('User', userSchema);
 module.exports = User

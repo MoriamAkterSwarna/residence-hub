@@ -9,7 +9,7 @@ servers:
   # Added by API Auto Mocking Plugin
   - description: SwaggerHub API Auto Mocking
     url: http://localhost:5000/api/v1
-  
+
 tags:
   - name: Auth
     description: This is group for Auth
@@ -22,57 +22,6 @@ tags:
 
 paths:
   /auth/signup:
-      post:
-        tags: [Auth]   
-        description: This is a post API for creating Users. 
-        requestBody:
-          content:
-            application/json: 
-              schema:
-                type: object 
-                properties:
-                  name: 
-                    type: string 
-                    example: John Doe 
-                  phoneNumber: 
-                    type: string
-                    example: 30078498
-                  password: 
-                    type: string
-                    example: 4ju4u44
-                    
-        responses:
-          "201":
-            description: This is a successful user creation 
-            content:
-              application/json:
-                schema:
-                  type: object 
-                  properties:
-                    message: 
-                      type: string
-                      example: User Created Successfully!
-                    status: 
-                      type: string
-                      example: 201
-                    data: 
-                      type: object
-                      properties:
-                        id: 
-                          type: string
-                          example: 28394
-                        name: 
-                          type: string
-                          example: John Doe
-                        phoneNumber:
-                          type: string
-                          example: "0299939"
-                          
-          "400":
-            $ref: "#/components/responses/400"
-          "500":
-            $ref: "#/components/responses/500"
-  /auth/signin:
     post:
       tags: [Auth]
       description: This is a post API for creating Users.
@@ -126,7 +75,7 @@ paths:
   /auth/signin:
     post:
       tags: [Auth]
-      description: This is sign in API for users.
+      description: This is a post API for creating Users.
       requestBody:
         content:
           application/json:
@@ -135,13 +84,14 @@ paths:
               properties:
                 phoneNumber:
                   type: string
-                  example: "0988393"
+                  example: 30078498
                 password:
                   type: string
-                  example: iui9390
+                  example: 4ju4u44
+
       responses:
-        "200":
-          description: user login successfully for rent.
+        "201":
+          description: This is a successful user creation
           content:
             application/json:
               schema:
@@ -149,28 +99,28 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: User logged in successfully!
+                    example: User Created Successfully!
                   status:
                     type: string
-                    example: 200
+                    example: 201
                   data:
                     type: object
                     properties:
                       id:
                         type: string
-                        example: 3893994
-                      phoneNumber:
-                        type: string
-                        example: "08493"
+                        example: 28394
                       name:
                         type: string
                         example: John Doe
+                      phoneNumber:
+                        type: string
+                        example: "0299939"
 
         "400":
           $ref: "#/components/responses/400"
-
         "500":
           $ref: "#/components/responses/500"
+
   /set/house-rent:
     post:
       tags: [House Owner]
@@ -234,7 +184,7 @@ paths:
                 userId:
                   type: string
                   example: 73838
-                availableDate: 
+                availableDate:
                   type: string
                   example: 12-01-2023
 
@@ -348,7 +298,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/availableDateParameters"
         - $ref: "#/components/parameters/limitParameters"
-        - $ref: "#/components/parameters/currentParameters"
+        - $ref: "#/components/parameters/currentPageParameters"
         - $ref: "#/components/parameters/sortTypeParameters"
         - $ref: "#/components/parameters/sortByParameters"
       responses:
@@ -466,7 +416,7 @@ paths:
                       userId:
                         type: string
                         example: 73838
-                      availableDate: 
+                      availableDate:
                         type: string
                         example: 12-01-2023
         "400":
@@ -493,7 +443,7 @@ paths:
                 photo:
                   type: string
                   example: image1
-                NID:
+                nid:
                   type: string
                   example: 849405983893
                 email:
@@ -546,6 +496,10 @@ paths:
       parameters:
         - $ref: "#/components/parameters/roleParameters"
         - $ref: "#/components/parameters/statusParameters"
+        - $ref: "#/components/parameters/limitParameters"
+        - $ref: "#/components/parameters/currentPageParameters"
+        - $ref: "#/components/parameters/sortTypeParameters"
+        - $ref: "#/components/parameters/sortByParameters"
       responses:
         "200":
           description: This is a successful response after successfully fetching user data.
@@ -705,7 +659,7 @@ components:
       schema:
         type: string
         example: 10
-    currentParameters:
+    currentPageParameters:
       in: query
       name: currentPage
       schema:
@@ -716,13 +670,13 @@ components:
       name: sortType
       schema:
         type: string
-        example: asy
+        example: des
     sortByParameters:
       in: query
       name: sortBy
       schema:
         type: string
-        example: availableDate
+        example: createdAt
     roleParameters:
       in: query
       name: role

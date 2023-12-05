@@ -1,19 +1,62 @@
-const { SingUpService, SingInService } = require("./user.services");
+const { singUpDB, singInDB, getSingleUserDB, updatePasswordDB, getAllUserDB, updateUserInfoDB } = require("./user.services");
 
-const SignUpController = async (req, res, next) => {
+const signUp = async (req, res, next) => {
     try {
         const body = req.body;
-        const response = await SingUpService(body)
+        const response = await singUpDB(body)
         res.status(201).json(response)
     } catch (e) {
         next(e);
     }
 }
 
-const SignInController = async (req, res, next) => {
+const signIn = async (req, res, next) => {
     try {
         const body = req.body;
-        const response = await SingInService(body);
+        const response = await singInDB(body);
+        res.status(200).json(response)
+    } catch (e) {
+        next(e)
+    }
+}
+
+
+const getSingleUser = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const response = await getSingleUserDB(id)
+        res.status(200).json(response)
+    } catch (e) {
+        next(e)
+    }
+}
+
+const updatePassword = async (req, res, next) => {
+    try {
+        const { userId } = req.query;
+        const body = req.body;
+
+        const response = await updatePasswordDB(userId, body)
+        res.status(200).json(response)
+    } catch (e) {
+        next(e)
+    }
+}
+
+const getAllUser = async (req, res, next) => {
+    try {
+        const query = req.query;
+        const response = await getAllUserDB(query)
+        res.status(200).json(response)
+    } catch (e) {
+        next(e)
+    }
+}
+const updateUserInfo = async (req, res, next) => {
+    try {
+        const query = req.query;
+        const body = req.body;
+        const response = await updateUserInfoDB(query, body)
         res.status(200).json(response)
     } catch (e) {
         next(e)
@@ -21,6 +64,10 @@ const SignInController = async (req, res, next) => {
 }
 
 module.exports = {
-    SignUpController,
-    SignInController
+    signUp,
+    signIn,
+    getSingleUser,
+    updatePassword,
+    getAllUser,
+    updateUserInfo
 }
