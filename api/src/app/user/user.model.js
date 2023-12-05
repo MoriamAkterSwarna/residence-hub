@@ -30,6 +30,12 @@ const userSchema = new Schema({
         default: "user",
         required: true
     },
+    status: {
+        type: String,
+        enum: ["pending", "approved", "block", "decline"],
+        default: "approved",
+        required: true
+    },
     houseIDForRent: [
         {
             type: Schema.Types.ObjectId,
@@ -42,7 +48,8 @@ const userSchema = new Schema({
             ref: "House",
         }
     ]
-})
+    
+}, { timestamps: true })
 
 const User = model('User', userSchema);
 module.exports = User

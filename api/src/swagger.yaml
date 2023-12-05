@@ -3,23 +3,22 @@ openapi: 3.0.0
 info:
   version: "1.0.0"
   title: residence-hub-api
-  description: The API for the Residence Based project so that users can find their expected house and owners can meet their expected rents. 
-  
+  description: The API for the Residence Based project so that users can find their expected house and owners can meet their expected rents.
+
 servers:
   # Added by API Auto Mocking Plugin
   - description: SwaggerHub API Auto Mocking
     url: http://localhost:5000/api/v1
 
-tags: 
-    - name: Auth
-      description: This is group for Auth
-    - name: User
-      description: This is group for User
-    - name: House
-      description: This is group for House
-    - name: House Owner
-      description: This is group for House
-      
+tags:
+  - name: Auth
+    description: This is group for Auth
+  - name: User
+    description: This is group for User
+  - name: House
+    description: This is group for House
+  - name: House Owner
+    description: This is group for House
 
 paths:
   /auth/signup:
@@ -75,122 +74,126 @@ paths:
             $ref: "#/components/responses/500"
   /auth/signin:
     post:
-      tags: [Auth]   
-      description: This is sign in API for users. 
+      tags: [Auth]
+      description: This is a post API for creating Users.
       requestBody:
         content:
-          application/json: 
-            schema:
-              type: object 
-              properties:
-                phoneNumber: 
-                  type: string
-                  example: "0988393"
-                password: 
-                  type: string
-                  example: iui9390
-      responses:
-        "200": 
-          description: user login successfully for rent. 
-          content:
-            application/json: 
-              schema:
-                type: object
-                properties:
-                  message: 
-                    type: string
-                    example: User logged in successfully!
-                  status: 
-                    type: string
-                    example: 200
-                  data: 
-                    type: object
-                    properties:
-                      id: 
-                        type: string
-                        example: 3893994
-                      phoneNumber: 
-                        type: string
-                        example: "08493"
-                      name: 
-                        type: string
-                        example: John Doe
-                        
-        "400":
-          $ref: "#/components/responses/400"
-          
-        "500":
-          $ref: "#/components/responses/500"
-  /set/house-rent: 
-    post:
-      tags: [House Owner]   
-      description: Post a Property to give rent
-      requestBody:
-        content:
-          application/json: 
+          application/json:
             schema:
               type: object
               properties:
-                photo: 
+                phoneNumber:
+                  type: string
+                  example: 30078498
+                password:
+                  type: string
+                  example: 4ju4u44
+
+      responses:
+        "201":
+          description: This is a successful user creation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: User Created Successfully!
+                  status:
+                    type: string
+                    example: 201
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 28394
+                      name:
+                        type: string
+                        example: John Doe
+                      phoneNumber:
+                        type: string
+                        example: "0299939"
+
+        "400":
+          $ref: "#/components/responses/400"
+        "500":
+          $ref: "#/components/responses/500"
+  
+  /set/house-rent:
+    post:
+      tags: [House Owner]
+      description: Post a Property to give rent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                photo:
                   type: array
                   items:
                     type: string
-                  example: 
-                    - photo1 
+                  example:
+                    - photo1
                     - photo2
                     - photo3
-                address: 
+                address:
                   type: string
                   example: 9/A Block E, Lalmatia
-                floor: 
+                floor:
                   type: string
                   example: 5th
-                bedRoom: 
-                  type: number 
+                bedRoom:
+                  type: number
                   example: 3
-                toilet: 
+                washRoom:
                   type: number
                   example: 2
-                kitchen: 
+                kitchen:
                   type: number
                   example: 1
-                diningRoom: 
+                diningRoom:
                   type: number
                   example: 1
-                tiles: 
+                tiles:
                   type: boolean
                   example: true
                 electricity:
                   type: boolean
                   example: true
-                gas: 
+                gas:
                   type: boolean
                   example: true
-                water: 
+                water:
                   type: boolean
                   example: true
                 lift:
                   type: boolean
                   example: false
                 garage:
-                  type: boolean 
+                  type: boolean
                   example: true
-                extraFacility: 
+                extraFacility:
                   type: string
                   example: North side - Dhanmondi lake
-                userId: 
+                status:
+                  type: string
+                  example: available
+                userId:
                   type: string
                   example: 73838
-                  
+
       responses:
-        "200": 
+        "200":
           description: Property Posted for rent Successfully!
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  message: 
+                  message:
                     type: string
                     example: Property Posted Successfully
                   status:
@@ -199,86 +202,83 @@ paths:
                   data:
                     type: object
                     properties:
-                      id: 
+                      id:
                         type: string
                         example: 3994949
-                      photo: 
+                      photo:
                         type: array
                         items:
                           type: string
-                        example: 
-                          - photo1 
+                        example:
+                          - photo1
                           - photo2
                           - photo3
-                      address: 
+                      address:
                         type: string
                         example: 9/A Block E, Lalmatia
-                      floor: 
+                      floor:
                         type: string
                         example: 5th
-                      bedRoom: 
-                        type: number 
+                      bedRoom:
+                        type: number
                         example: 3
-                      toilet: 
+                      toilet:
                         type: number
                         example: 2
-                      kitchen: 
+                      kitchen:
                         type: number
                         example: 1
-                      diningRoom: 
+                      diningRoom:
                         type: number
                         example: 1
-                      tiles: 
+                      tiles:
                         type: boolean
                         example: true
                       electricity:
                         type: boolean
                         example: true
-                      gas: 
+                      gas:
                         type: boolean
                         example: true
-                      water: 
+                      water:
                         type: boolean
                         example: true
                       lift:
                         type: boolean
                         example: false
                       garage:
-                        type: boolean 
+                        type: boolean
                         example: true
-                      extraFacility: 
+                      extraFacility:
                         type: string
                         example: North side - Dhanmondi lake
-                      userId: 
+                      userId:
                         type: string
                         example: 73838
         "400":
           $ref: "#/components/responses/400"
-          
+
         "500":
           $ref: "#/components/responses/500"
   /house:
     delete:
-      tags: [House]   
+      tags: [House]
       description: Delete a Property
-      parameters: 
-        - 
-          $ref: "#/components/parameters/userIdParameters"
-        - 
-          
-          $ref: "#/components/parameters/houseIdParameters"
+      parameters:
+        - $ref: "#/components/parameters/userIdParameters"
+        - $ref: "#/components/parameters/houseIdParameters"
       responses:
-        "203": 
-          description: Task successfully for done. 
+        "203":
+          description: Task successfully for done.
           content:
-            application/json: 
+            application/json:
               schema:
                 type: object
                 properties:
-                  message: 
+                  message:
                     type: string
                     example: Task done successfully!
-                  status: 
+                  status:
                     type: string
                     example: 203
         "400":
@@ -291,13 +291,13 @@ paths:
           $ref: "#/components/responses/500"
     get:
       tags: [House]
-      description: This API will serve single house data 
-      parameters: 
+      description: This API will serve single house data
+      parameters:
         - $ref: "#/components/parameters/availableDateParameters"
         - $ref: "#/components/parameters/limitParameters"
-        - $ref: "#/components/parameters/currentParameters"
+        - $ref: "#/components/parameters/currentPageParameters"
         - $ref: "#/components/parameters/sortTypeParameters"
-        - $ref: "#/components/parameters/sortyByParameters"
+        - $ref: "#/components/parameters/sortByParameters"
       responses:
         "200":
           description: This API will return house data
@@ -308,51 +308,43 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: Successfully fetch 
+                    example: Successfully fetch
                   data:
                     type: array
                     items:
                       type: object
-                    example: 
-                    - 
-                      id: 3994949
-                      photo: 
-                      
-                          - photo1 
+                    example:
+                      - id: 3994949
+                        photo:
+                          - photo1
                           - photo2
                           - photo3
-                      address: 
-                        9/A Block E, Lalmatia
-                      floor: 
-                        5th
-                      bedRoom: 
-                        3
-                      toilet: 
-                         2
-                      kitchen: 
-                       1
-                      diningRoom: 1
-                      tiles: true
-                      electricity: true
-                      gas: true
-                      water:  true
-                      lift: false
-                      garage: true
-                      extraFacility:  North side - Dhanmondi lake
-                      userId:  73838
-                   
-                    
+                        address: 9/A Block E, Lalmatia
+                        floor: 5th
+                        bedRoom: 3
+                        toilet: 2
+                        kitchen: 1
+                        diningRoom: 1
+                        tiles: true
+                        electricity: true
+                        gas: true
+                        water: true
+                        lift: false
+                        garage: true
+                        extraFacility: North side - Dhanmondi lake
+                        userId: 73838
+
         "400":
           $ref: "#/components/responses/400"
         "404":
           $ref: "#/components/responses/404"
         "500":
-          $ref: "#/components/responses/500"             
+          $ref: "#/components/responses/500"
   /house/{id}:
     get:
       tags: [House]
-      description: This API will serve single house data 
-      parameters: 
+      description: This API will serve single house data
+      parameters:
         - $ref: "#/components/parameters/idParam"
       responses:
         "200":
@@ -364,61 +356,61 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: Successfully fetch 
+                    example: Successfully fetch
                   data:
                     type: object
                     properties:
-                      id: 
+                      id:
                         type: string
                         example: 3994949
-                      photo: 
+                      photo:
                         type: array
                         items:
                           type: string
-                        example: 
-                          - photo1 
+                        example:
+                          - photo1
                           - photo2
                           - photo3
-                      address: 
+                      address:
                         type: string
                         example: 9/A Block E, Lalmatia
-                      floor: 
+                      floor:
                         type: string
                         example: 5th
-                      bedRoom: 
-                        type: number 
+                      bedRoom:
+                        type: number
                         example: 3
-                      toilet: 
+                      toilet:
                         type: number
                         example: 2
-                      kitchen: 
+                      kitchen:
                         type: number
                         example: 1
-                      diningRoom: 
+                      diningRoom:
                         type: number
                         example: 1
-                      tiles: 
+                      tiles:
                         type: boolean
                         example: true
                       electricity:
                         type: boolean
                         example: true
-                      gas: 
+                      gas:
                         type: boolean
                         example: true
-                      water: 
+                      water:
                         type: boolean
                         example: true
                       lift:
                         type: boolean
                         example: false
                       garage:
-                        type: boolean 
+                        type: boolean
                         example: true
-                      extraFacility: 
+                      extraFacility:
                         type: string
                         example: North side - Dhanmondi lake
-                      userId: 
+                      userId:
                         type: string
                         example: 73838
         "400":
@@ -426,61 +418,61 @@ paths:
         "404":
           $ref: "#/components/responses/404"
         "500":
-          $ref: "#/components/responses/500"  
-  /user: 
+          $ref: "#/components/responses/500"
+  /user:
     patch:
       tags: [User]
-      description: Update User Profile 
-      parameters: 
+      description: Update User Profile
+      parameters:
         - $ref: "#/components/parameters/userIdParameters"
-      requestBody: 
+      requestBody:
         content:
-          application/json: 
+          application/json:
             schema:
-              type: object 
+              type: object
               properties:
-                permanentAddress: 
+                permanentAddress:
                   type: string
                   example: jhalkathi
-                photo: 
+                photo:
                   type: string
                   example: image1
-                NID: 
+                NID:
                   type: string
                   example: 849405983893
-                email: 
+                email:
                   type: string
                   example: ab@cd.com
-      responses:  
-        "200": 
-          description: user updated successfully. 
+      responses:
+        "200":
+          description: user updated successfully.
           content:
-            application/json: 
+            application/json:
               schema:
                 type: object
                 properties:
-                  message: 
+                  message:
                     type: string
                     example: User Updated in successfully!
-                  status: 
+                  status:
                     type: string
                     example: 200
-                  data: 
+                  data:
                     type: object
                     properties:
-                      id: 
+                      id:
                         type: string
                         example: 3893994
-                      permanentAddress: 
+                      permanentAddress:
                         type: string
                         example: jhalkathi
-                      photo: 
+                      photo:
                         type: string
                         example: image1
-                      NID: 
+                      NID:
                         type: string
                         example: 849405983893
-                      email: 
+                      email:
                         type: string
                         example: ab@cd.com
         "400":
@@ -491,13 +483,17 @@ paths:
           $ref: "#/components/responses/404"
         "500":
           $ref: "#/components/responses/500"
-          
+
     get:
       tags: [User]
       description: This API will get all users
-      parameters: 
+      parameters:
         - $ref: "#/components/parameters/roleParameters"
         - $ref: "#/components/parameters/statusParameters"
+        - $ref: "#/components/parameters/limitParameters"
+        - $ref: "#/components/parameters/currentPageParameters"
+        - $ref: "#/components/parameters/sortTypeParameters"
+        - $ref: "#/components/parameters/sortByParameters"
       responses:
         "200":
           description: This is a successful response after successfully fetching user data.
@@ -512,33 +508,33 @@ paths:
                   data:
                     type: object
                     properties:
-                      id: 
+                      id:
                         type: string
                         example: 3893994
-                      permanentAddress: 
+                      permanentAddress:
                         type: string
                         example: jhalkathi
-                      photo: 
+                      photo:
                         type: string
                         example: image1
-                      NID: 
+                      NID:
                         type: string
                         example: 849405983893
-                      email: 
+                      email:
                         type: string
                         example: ab@cd.com
         "400":
           $ref: "#/components/responses/400"
-        
+
         "404":
           $ref: "#/components/responses/404"
         "500":
           $ref: "#/components/responses/500"
   /user/{id}:
-     get:
+    get:
       tags: [User]
       description: This API will retun Single User data
-      parameters: 
+      parameters:
         - $ref: "#/components/parameters/idParam"
       responses:
         "200":
@@ -554,66 +550,65 @@ paths:
                   data:
                     type: object
                     properties:
-                      id: 
+                      id:
                         type: string
                         example: 3893994
-                      permanentAddress: 
+                      permanentAddress:
                         type: string
                         example: jhalkathi
-                      photo: 
+                      photo:
                         type: string
                         example: image1
-                      NID: 
+                      NID:
                         type: string
                         example: 849405983893
-                      email: 
+                      email:
                         type: string
                         example: ab@cd.com
         "400":
           $ref: "#/components/responses/400"
-        
+
         "404":
           $ref: "#/components/responses/404"
         "500":
           $ref: "#/components/responses/500"
-  /user/password: 
-    patch: 
+  /user/password:
+    patch:
       tags: [User]
       description: Update User Password
-      parameters: 
+      parameters:
         - $ref: "#/components/parameters/userIdParameters"
-      requestBody: 
+      requestBody:
         content:
-          application/json: 
+          application/json:
             schema:
-              type: object 
+              type: object
               properties:
-                oldPassword: 
+                oldPassword:
                   type: string
                   example: fj489494
-                newPassword: 
+                newPassword:
                   type: string
                   example: 4494u4
-                confirmPassword: 
-                  type: string 
+                confirmPassword:
+                  type: string
                   example: 48484jfj
-                  
-      responses:  
-        "200": 
-          description: Password updated successfully. 
+
+      responses:
+        "200":
+          description: Password updated successfully.
           content:
-            application/json: 
+            application/json:
               schema:
                 type: object
                 properties:
-                  message: 
+                  message:
                     type: string
                     example: Password Updated in successfully!
-                  status: 
+                  status:
                     type: string
                     example: 200
-                  
-                      
+
         "400":
           $ref: "#/components/responses/400"
         "401":
@@ -621,127 +616,124 @@ paths:
         "404":
           $ref: "#/components/responses/404"
         "500":
-          $ref: "#/components/responses/500"                   
-              
-                
+          $ref: "#/components/responses/500"
+
 components:
-  parameters: 
+  parameters:
     idParam:
       in: path
       name: id
       description: this param will help to find specific data
       schema:
-          type: string
-          example: 123
+        type: string
+        example: 123
       required: true
-      
+
     userIdParameters:
       in: query
       name: userId
       schema:
-        type: string 
+        type: string
         example: 494u
-    houseIdParameters: 
+    houseIdParameters:
       in: query
       name: houseId
       schema:
         type: string
         example: 893h
-    availableDateParameters: 
+    availableDateParameters:
       in: query
       name: availableDate
       schema:
         type: string
         example: 12-03-2023
-    limitParameters: 
+    limitParameters:
       in: query
-      name: availableDate
+      name: limit
       schema:
         type: string
         example: 10
-    currentParameters: 
+    currentPageParameters:
       in: query
-      name: availableDate
+      name: currentPage
       schema:
         type: string
         example: 2
-    sortTypeParameters: 
+    sortTypeParameters:
       in: query
-      name: availableDate
+      name: sortType
       schema:
         type: string
-        example: asy
-    sortyByParameters: 
+        example: des
+    sortByParameters:
       in: query
-      name: availableDate
+      name: sortBy
       schema:
         type: string
-        example: availableData
-    roleParameters: 
+        example: createdAt
+    roleParameters:
       in: query
       name: role
       schema:
         type: string
         example: houseOwner
-    statusParameters: 
+    statusParameters:
       in: query
       name: status
       schema:
         type: string
         example: approved
-      
-  
+
   responses:
     "400":
       description: An Error Occured
       content:
-         application/json:
+        application/json:
           schema:
             type: object
             properties:
-              message: 
+              message:
                 type: string
                 example: Something Went Wrong!
-              status: 
+              status:
                 type: string
                 example: 400
     "401":
       description: An Error Occured
       content:
-         application/json:
+        application/json:
           schema:
             type: object
             properties:
-              message: 
+              message:
                 type: string
                 example: Unauthorized Acess!
-              status: 
+              status:
                 type: string
                 example: 401
     "404":
       description: An Error Occured
       content:
-         application/json:
+        application/json:
           schema:
             type: object
             properties:
-              message: 
+              message:
                 type: string
                 example: Data Not Found!
-              status: 
+              status:
                 type: string
                 example: 404
-    "500": 
+    "500":
       description: An Error occured
       content:
-        application/json: 
+        application/json:
           schema:
             type: object
             properties:
-              message: 
+              message:
                 type: string
                 example: Server Error!
-              status: 
+              status:
                 type: string
                 example: 500
-  
