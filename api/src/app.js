@@ -26,6 +26,7 @@ app.get("/", (req, res) => {
 
 
 app.use('/api/v1', HouseRouter)
+app.use("/api/v1", UserRouter)
 
 
 app.use((err, _req, res, _next) => {
