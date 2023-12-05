@@ -1,23 +1,22 @@
+const catchAsync = require("../../utils/catchAsync");
 const {  createHouseDB, deleteHouseDB, getSingleHouseFromDB, getAllHouseFromDB } = require("./house.services");
+const houseValidationSchema = require("./house.validation");
 
-const createHouse = async (req, res) => {
-    try {
+
+const createHouse = catchAsync(async (req, res) => {
+  
         const { body } = req;
-        const houseData = await createHouseDB(body);
+        const zodParsedData = await houseValidationSchema.parseAsync(body);
+        const houseData = await createHouseDB(zodParsedData);
+        // const houseData = await createHouseDB(body);
 
         res.status(201).json({
             status: "success",
             data: houseData,
         });
-    } catch (error) {
-        res.status(400).json({
-            status: "fail",
-            message: error.message,
-        });
-    }
-}
-const getAllHouse = async (req, res) => {
-    try {
+    
+})
+const getAllHouse =catchAsync( async (req, res) => {
         console.log(req.query)
         const { query } = req;
         const houseData = await getAllHouseFromDB(query);
@@ -26,31 +25,21 @@ const getAllHouse = async (req, res) => {
             status: "success",
             data: houseData,
         });
-    }catch(error){
-         res.status(400).json({
-            status: "fail",
-            message: error.message,
-        });
-    }
-}
+   
+})
 
-const getSingleHouse = async (req, res) => {
-    try {
+const getSingleHouse = catchAsync(async (req, res) => {
+  
         const { houseId } = req.params;
         const houseData = await getSingleHouseFromDB(houseId);
         res.status(200).json({
             status: "success",
             data: houseData,
         });
-    } catch (error) {
-        res.status(400).json({
-            status: "fail",
-            message: error.message,
-        });
-    }
-}
-const deleteHouse = async (req, res) => {
-    try {
+   
+})
+const deleteHouse = catchAsync(async (req, res) => {
+    
         const { userId, houseId } = req.query;
         console.log(houseId, userId)
         const houseData = await deleteHouseDB(userId,houseId);
@@ -59,13 +48,8 @@ const deleteHouse = async (req, res) => {
             status: "success",
             data: houseData,
         });
-    } catch (error) {
-        res.status(400).json({
-            status: "fail",
-            message: error.message,
-        });
-    }
-}
+    
+})
 
 
 module.exports = {
