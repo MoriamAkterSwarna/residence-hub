@@ -1,5 +1,6 @@
- const Router= require('express').Router();
-const {  createHouse, deleteHouse } = require('./house.conrtoller');
+const { createHouse, deleteHouse } = require('./house.controller');
+const Router= require('express').Router();
+
 
 Router.post('/set/house-rent', createHouse)
 Router.delete('/house/:houseId', deleteHouse)
