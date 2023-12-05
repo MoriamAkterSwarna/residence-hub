@@ -496,8 +496,8 @@ paths:
       parameters:
         - $ref: "#/components/parameters/roleParameters"
         - $ref: "#/components/parameters/statusParameters"
-        - $ref: "#/components/parameters/limitParameters"
         - $ref: "#/components/parameters/currentPageParameters"
+        - $ref: "#/components/parameters/limitParameters"
         - $ref: "#/components/parameters/sortTypeParameters"
         - $ref: "#/components/parameters/sortByParameters"
       responses:
@@ -664,7 +664,7 @@ components:
       name: currentPage
       schema:
         type: string
-        example: 2
+        example: 1
     sortTypeParameters:
       in: query
       name: sortType

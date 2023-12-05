@@ -150,14 +150,34 @@ const getAllUserDB = async (query) => {
     }
 
     const intLimit = parseInt(limit);
-    const intPage = parseInt(currentPage);
+    const currentIntPage = parseInt(currentPage);
+    const totalPage = Math.ceil(allUserArray.length / intLimit)
+    const skip = currentIntPage * intLimit - intLimit;
+    const totalUser = allUserArray.length;
 
-    const skip = intPage * intLimit - intLimit;
+    // pagination 
     allUserArray = allUserArray.slice(skip, skip + intLimit);
 
 
 
-    return allUserArray
+    const response = {
+        message: 'Successfully fetch data',
+        data: allUserArray,
+        totalPage,
+        totalUser,
+        link: {
+            self: `http://localhost:5000/api/v1/user?limit=${limit}&currentPage=${currentPage}&sortType=${sortType}&sortBy=${sortBy}`
+        }
+    }
+
+    if (currentIntPage < totalPage) {
+        response.link.next = `http://localhost:5000/api/v1/user?limit=${limit}&currentPage=${currentIntPage + 1}&sortType=${sortType}&sortBy=${sortBy}`
+    }
+
+    if (currentIntPage > 1) {
+        response.link.previous = `http://localhost:5000/api/v1/user?limit=${limit}&currentPage=${currentIntPage - 1}&sortType=${sortType}&sortBy=${sortBy}`
+    }
+    return response
 }
 
 

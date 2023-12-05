@@ -2,9 +2,9 @@ const User = require('../user/user.model');
 const House = require('./house.model');
 const createHouseDB = async (house) => {
     try {
-        
+
         const houseData = await House.create(house);
-         await User.findOneAndUpdate({
+        await User.findOneAndUpdate({
             _id: house.userId
         }, {
             $push: {
@@ -18,14 +18,15 @@ const createHouseDB = async (house) => {
 }
 
 const getAllHouseFromDB = async (query) => {
-    const {availableDate, limit,currentPage,sortType,sortBy} = query
-        const date =availableDate
-      const skip = (currentPage-1)*(Number(limit)) || 0
-      const sortOrder = sortType === 'asc' ? 1 : -1
+    const { availableDate, limit, currentPage, sortType, sortBy } = query
+    const date = availableDate
+    const skip = (currentPage - 1) * (Number(limit)) || 0
+    const sortOrder = sortType === 'asc' ? 1 : -1
 
-      const sort= {[sortBy]:sortOrder}
+    const sort = { [sortBy]: sortOrder }
     try {
-        const housesData = await House.find({availableDate: date}).sort(sort).skip(skip).limit(parseInt(limit));
+        const housesData = await House.find({ availableDate: date }).sort(sort).skip(skip).limit(parseInt(limit));
+        
         // console.log(housesData, 'housesData services')
         return housesData;
     } catch (error) {
@@ -44,6 +45,7 @@ const getSingleHouseFromDB = async (houseId) => {
 const deleteHouseDB = async (userId, houseId) => {
     try {
 
+        // TODO: make sure the user who request to delete house is admin or valid user
         const houseData = House.findOneAndDelete({ userId, _id: houseId });
         return houseData;
     } catch (error) {
