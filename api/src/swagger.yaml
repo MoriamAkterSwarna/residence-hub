@@ -9,7 +9,7 @@ servers:
   # Added by API Auto Mocking Plugin
   - description: SwaggerHub API Auto Mocking
     url: http://localhost:5000/api/v1
-
+  
 tags:
   - name: Auth
     description: This is group for Auth
@@ -21,7 +21,58 @@ tags:
     description: This is group for House
 
 paths:
-  /auth/singup:
+  /auth/signup:
+      post:
+        tags: [Auth]   
+        description: This is a post API for creating Users. 
+        requestBody:
+          content:
+            application/json: 
+              schema:
+                type: object 
+                properties:
+                  name: 
+                    type: string 
+                    example: John Doe 
+                  phoneNumber: 
+                    type: string
+                    example: 30078498
+                  password: 
+                    type: string
+                    example: 4ju4u44
+                    
+        responses:
+          "201":
+            description: This is a successful user creation 
+            content:
+              application/json:
+                schema:
+                  type: object 
+                  properties:
+                    message: 
+                      type: string
+                      example: User Created Successfully!
+                    status: 
+                      type: string
+                      example: 201
+                    data: 
+                      type: object
+                      properties:
+                        id: 
+                          type: string
+                          example: 28394
+                        name: 
+                          type: string
+                          example: John Doe
+                        phoneNumber:
+                          type: string
+                          example: "0299939"
+                          
+          "400":
+            $ref: "#/components/responses/400"
+          "500":
+            $ref: "#/components/responses/500"
+  /auth/signin:
     post:
       tags: [Auth]
       description: This is a post API for creating Users.
