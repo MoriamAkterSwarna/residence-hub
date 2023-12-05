@@ -43,8 +43,17 @@ const getSingleHouseFromDB = async (houseId) => {
 
 const deleteHouseDB = async (userId, houseId) => {
     try {
-
-        const houseData = House.findOneAndDelete({ userId, _id: houseId });
+        const user = await User.findOne({ 
+            _id: userId,
+            houseIDForRent:{$in: [houseId]}
+         });
+         if(!user){
+             throw new Error('User not found')
+         }
+        const houseData =await House.findOneAndDelete({ userId, _id: houseId });
+        if(houseData){
+            await User.updateOne({_id:userId},{$pull: {houseIDForRent: houseId}})
+        }
         return houseData;
     } catch (error) {
         throw new Error(error);
