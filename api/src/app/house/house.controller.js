@@ -1,9 +1,10 @@
-const {  createHouseDB, deleteHouseDB, getSingleHouseFromDB } = require("./house.services");
+const {  createHouseDB, deleteHouseDB, getSingleHouseFromDB, getAllHouseFromDB } = require("./house.services");
 
 const createHouse = async (req, res) => {
     try {
         const { body } = req;
         const houseData = await createHouseDB(body);
+
         res.status(201).json({
             status: "success",
             data: houseData,
@@ -15,6 +16,24 @@ const createHouse = async (req, res) => {
         });
     }
 }
+const getAllHouse = async (req, res) => {
+    try {
+        console.log(req.query)
+        const { query } = req;
+        const houseData = await getAllHouseFromDB(query);
+        console.log(houseData)
+        res.status(200).json({
+            status: "success",
+            data: houseData,
+        });
+    }catch(error){
+         res.status(400).json({
+            status: "fail",
+            message: error.message,
+        });
+    }
+}
+
 const getSingleHouse = async (req, res) => {
     try {
         const { houseId } = req.params;
@@ -52,6 +71,7 @@ const deleteHouse = async (req, res) => {
 module.exports = {
     createHouse,
     deleteHouse,
+    getAllHouse,
     getSingleHouse
     
 }

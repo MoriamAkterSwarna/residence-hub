@@ -70,8 +70,13 @@ const houseSchema = new Schema({
     },
     rentDate: {
         type: Date,
+    },
+    availableDate: {
+        type:String,
+        required: true
     }
     }
+    
     
 )
  const House = model('House', houseSchema);

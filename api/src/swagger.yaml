@@ -234,6 +234,9 @@ paths:
                 userId:
                   type: string
                   example: 73838
+                availableDate: 
+                  type: string
+                  example: 12-01-2023
 
       responses:
         "200":
@@ -347,7 +350,7 @@ paths:
         - $ref: "#/components/parameters/limitParameters"
         - $ref: "#/components/parameters/currentParameters"
         - $ref: "#/components/parameters/sortTypeParameters"
-        - $ref: "#/components/parameters/sortyByParameters"
+        - $ref: "#/components/parameters/sortByParameters"
       responses:
         "200":
           description: This API will return house data
@@ -463,6 +466,9 @@ paths:
                       userId:
                         type: string
                         example: 73838
+                      availableDate: 
+                        type: string
+                        example: 12-01-2023
         "400":
           $ref: "#/components/responses/400"
         "404":
@@ -695,28 +701,28 @@ components:
         example: 12-03-2023
     limitParameters:
       in: query
-      name: availableDate
+      name: limit
       schema:
         type: string
         example: 10
     currentParameters:
       in: query
-      name: availableDate
+      name: currentPage
       schema:
         type: string
         example: 2
     sortTypeParameters:
       in: query
-      name: availableDate
+      name: sortType
       schema:
         type: string
         example: asy
-    sortyByParameters:
+    sortByParameters:
       in: query
-      name: availableDate
+      name: sortBy
       schema:
         type: string
-        example: availableData
+        example: availableDate
     roleParameters:
       in: query
       name: role
