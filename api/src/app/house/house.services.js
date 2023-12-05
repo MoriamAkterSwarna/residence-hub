@@ -7,6 +7,14 @@ const createHouseDB = async (house) => {
         throw new Error(error);
     }
 }
+const getSingleHouseFromDB = async (houseId) => {
+    try {
+        const houseData = House.findById(houseId);
+        return houseData;
+    } catch (error) {
+        throw new Error(error);
+    }
+}
 const deleteHouseDB = async (userId, houseId) => {
     try {
         
@@ -21,4 +29,5 @@ const deleteHouseDB = async (userId, houseId) => {
 module.exports = {
     createHouseDB,
     deleteHouseDB,
+    getSingleHouseFromDB
 }
