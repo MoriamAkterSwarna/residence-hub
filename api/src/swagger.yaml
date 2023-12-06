@@ -625,7 +625,6 @@ paths:
       parameters: 
         - $ref: '#/components/parameters/userIdParameters'
         - $ref: '#/components/parameters/houseIdParameters'
-        - $ref: '#/components/parameters/rentDateParameters'
         - $ref: '#/components/parameters/releaseDateParameters'
       responses:
         '201':
@@ -641,7 +640,7 @@ paths:
                   data:
                     type: object
                     properties:
-                      properties:
+                      
                       id: 
                         type: string
                         example: 3994949

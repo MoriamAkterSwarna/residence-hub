@@ -44,9 +44,17 @@ const getSingleHouseFromDB = async (houseId) => {
 
 const deleteHouseDB = async (userId, houseId) => {
     try {
-
-        // TODO: make sure the user who request to delete house is admin or valid user
-        const houseData = House.findOneAndDelete({ userId, _id: houseId });
+        const user = await User.findOne({ 
+            _id: userId,
+            houseIDForRent:{$in: [houseId]}
+         });
+         if(!user){
+             throw new Error('User not found')
+         }
+        const houseData =await House.findOneAndDelete({ userId, _id: houseId });
+        if(houseData){
+            await User.updateOne({_id:userId},{$pull: {houseIDForRent: houseId}})
+        }
         return houseData;
     } catch (error) {
         throw new Error(error);

@@ -54,7 +54,7 @@ const houseSchema = new Schema({
         required: true
     },
     extraFacility: {
-        type: Array,
+        type: String,
         required: true
     },
     userId: {
