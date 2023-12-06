@@ -754,20 +754,11 @@ paths:
   /rent:
     post:
       tags: [Rent]
-<<<<<<< HEAD
       description: This is API for geting new house for rent 
       parameters: 
         - $ref: '#/components/parameters/userIdParameters'
         - $ref: '#/components/parameters/houseIdParameters'
         - $ref: '#/components/parameters/releaseDateParameters'
-=======
-      description: This is API for geting new house for rent
-      parameters:
-        - $ref: "#/components/parameters/userIdParameters"
-        - $ref: "#/components/parameters/houseIdParameters"
-        - $ref: "#/components/parameters/rentDateParameters"
-        - $ref: "#/components/parameters/releaseDateParameters"
->>>>>>> 75f336bd4fa40bb7e826fe51ac17c84fc55424d0
       responses:
         "201":
           description: this is susccessfll response after successfully geting rent house
@@ -782,12 +773,8 @@ paths:
                   data:
                     type: object
                     properties:
-<<<<<<< HEAD
                       
                       id: 
-=======
-                      id:
->>>>>>> 75f336bd4fa40bb7e826fe51ac17c84fc55424d0
                         type: string
                         example: 3994949
                       photo:
