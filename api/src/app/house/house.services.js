@@ -41,6 +41,15 @@ const getSingleHouseFromDB = async (houseId) => {
         throw new Error(error);
     }
 }
+const updateHouseDB = async (houseId, house) => {   
+    try{
+        const houseData = House.findByIdAndUpdate(houseId, house, { new: true , runValidators: true});
+        // console.log(houseData, 'houseData services')
+        return houseData;
+    }catch(error){
+        throw new Error(error);
+    }
+}
 
 const deleteHouseDB = async (userId, houseId) => {
     try {
@@ -66,5 +75,6 @@ module.exports = {
     createHouseDB,
     deleteHouseDB,
     getAllHouseFromDB,
-    getSingleHouseFromDB
+    getSingleHouseFromDB,
+    updateHouseDB
 }

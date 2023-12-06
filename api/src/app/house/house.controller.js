@@ -1,6 +1,7 @@
 const catchAsync = require("../../utils/catchAsync");
-const {  createHouseDB, deleteHouseDB, getSingleHouseFromDB, getAllHouseFromDB } = require("./house.services");
-const houseValidationSchema = require("./house.validation");
+const {  createHouseDB, deleteHouseDB, getSingleHouseFromDB, getAllHouseFromDB, updateHouseDB } = require("./house.services");
+const { houseValidationSchema, updateHouseValidationSchema } = require("./house.validation");
+
 
 
 const createHouse = catchAsync(async (req, res) => {
@@ -38,6 +39,19 @@ const getSingleHouse = catchAsync(async (req, res) => {
         });
    
 })
+const updateHouse = catchAsync(async (req, res) => {
+      
+          const { houseId } = req.params;
+          const { body } = req;
+          const zodParsedData = await updateHouseValidationSchema.parseAsync(body);
+          const houseData = await updateHouseDB(houseId, zodParsedData);
+        //   console.log(houseData, 'controller')
+          res.status(200).json({
+                status: "success",
+                data: houseData,
+          });
+     
+    })
 const deleteHouse = catchAsync(async (req, res) => {
     
         const { userId, houseId } = req.query;
@@ -56,6 +70,7 @@ module.exports = {
     createHouse,
     deleteHouse,
     getAllHouse,
-    getSingleHouse
+    getSingleHouse,
+    updateHouse
     
 }
