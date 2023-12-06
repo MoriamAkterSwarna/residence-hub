@@ -68,9 +68,6 @@ const houseSchema = new Schema({
         required: true
 
     },
-    rentDate: {
-        type: Date,
-    },
     availableDate: {
         type:String,
         required: true
